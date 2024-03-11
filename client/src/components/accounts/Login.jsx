@@ -105,7 +105,7 @@ const Login =() =>{
                         
                         <LoginButton variant="contained">Login</LoginButton>
                         <Text style={{ textAlign:'center'}}>OR</Text>
-                        <SignupButton onClick={() => toggleSignup()}>Create an account</SignupButton>
+                        <SignupButton variant="contained" onClick={() => toggleSignup()}>Create an account</SignupButton>
                     </Wrapper> 
                 :
                 <Wrapper>
@@ -115,7 +115,7 @@ const Login =() =>{
                     <TextField variant="standard" onChange={(e) => onInputChange(e)} name='reva_mail' label="Enter reva mail id "/>
                     
                     {error && <Error>{error}</Error>}
-                    <SignupButton onClick={() => signupUser()}>SignUp</SignupButton>
+                    <SignupButton variant="contained" onClick={() => signupUser()}>SignUp</SignupButton>
                     <Text style={{ textAlign:'center'}}>OR</Text>
                     <LoginButton variant="contained" onClick={() => toggleSignup()}>Already have an account</LoginButton>
                 </Wrapper>
