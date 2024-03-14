@@ -38,7 +38,7 @@ axiosInstance.interceptors.response.use(
 //If success -> return [isSuccess: true, data: object]
 const processResponse = (response) => {
     if(response?.status === 200){
-        return { isSucess: true, data: response.data };
+        return { isSuccess: true, data: response.data };
     } else {
         return {
             isFailure: true,

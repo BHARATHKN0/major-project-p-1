@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
   reva_srn:{
     type:String,
     required: true,
-    unique:true
+    // match: /^[A-Za-z]\d{5}$/
   },
   reva_mail:{
     type:String,
