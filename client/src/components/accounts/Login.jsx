@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 
 import {Box, TextField, Button, styled, Typography } from '@mui/material';
 
 import { API } from '../../service/api';
+import { DataContext } from '../../context/DataProvider';
+
+import { useNavigate } from 'react-router-dom';
 
 const  Component = styled(Box)`
     width:400px;
@@ -56,8 +59,13 @@ const Text = styled(Typography)`
     font-size:16px;
 `;
 
+const loginInitialValues = {
+    username: '',
+    password: ''
+}
+
 const signupInitialValues = {
-    name:'',
+    username:'',
     password:'',
     reva_srn:'',
     reva_mail:'',
@@ -67,8 +75,12 @@ const Login =() =>{
     const imageURL = 'https://revaeduin.s3.ap-south-1.amazonaws.com/uploads/images/1636545030_eb8e424b8c32ef9fc017.png';
   
     const [account, toggleAccount ] = useState('login');
-    const [signup, setSignup] = useState(signupInitialValues)
+    const [signup, setSignup] = useState(signupInitialValues);
+    const [login, setLogin] = useState(loginInitialValues)
     const [error, setError] = useState(' ');
+
+    const { setAccount } = useContext(DataContext);
+    const navigate = useNavigate();
 
 
     const toggleSignup = () => {
@@ -91,27 +103,49 @@ const Login =() =>{
          }
     } 
 
+    const onvaluechange = (e) => {
+        setLogin({ ...login, [e.target.name]: e.target.value})
+
+    }
+
+    const loginUser = async () => {
+        let response = await API.userLogin(login);
+        if (response.isSuccess) {
+            setError('');
+
+            sessionStorage.setItem('accessToken', `Bearer ${response.data.accessToken}`);
+            sessionStorage.setItem('refreshToken', `Bearer ${response.data.refreshToken}`);
+
+            setAccount({ username: response.data.username, reva_srn: response.data.reva_srn })
+
+            navigate('/');
+
+        } else {
+            setError('Something went wrong! Please try again later');
+        }
+    }
+
     return (
         <Component>
         <Box>
-            <Image src={imageURL} alt="login"/>
+            <Image src={imageURL} alt="log"/>
             {
-                account ==='login' ?
+                account === 'login' ?
                     <Wrapper>
-                        <TextField variant="standard" name='name' label ="Enter username"/>
-                        <TextField variant="standard" name='password' label="Enter password"/>
+                        <TextField variant="standard" value={login.username} onChange={(e) => onvaluechange(e)} name='username' label ="Enter username"/>
+                        <TextField variant="standard" value={login.password} onChange={(e) => onvaluechange(e)} name='password' label="Enter password"/>
 
                         {error && <Error>{error}</Error>}
                         
-                        <LoginButton variant="contained">Login</LoginButton>
+                        <LoginButton variant="contained" onClick={() => loginUser()}>Login</LoginButton>
                         <Text style={{ textAlign:'center'}}>OR</Text>
                         <SignupButton variant="contained" onClick={() => toggleSignup()}>Create an account</SignupButton>
                     </Wrapper> 
                 :
                 <Wrapper>
-                    <TextField variant="standard" onChange={(e) => onInputChange(e)} name='name' label ="Enter username"/>
+                    <TextField variant="standard" onChange={(e) => onInputChange(e)} name='username' label ="Enter username"/>
                     <TextField variant="standard" onChange={(e) => onInputChange(e)} name='password' label="Enter password"/>  
-                    <TextField variant="standard" onChange={(e) => onInputChange(e)} name='reva_srn' label ="Enter srn"/>
+                    <TextField variant="standard" onChange={(e) => onInputChange(e)} name='reva_srn' label ="Enter srn"/> 
                     <TextField variant="standard" onChange={(e) => onInputChange(e)} name='reva_mail' label="Enter reva mail id "/>
                     
                     {error && <Error>{error}</Error>}
