@@ -1,0 +1,11 @@
+.back{
+    background: url('../../Assets/ANI-20230731102727.jpg') no-repeat;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center
+    
+}

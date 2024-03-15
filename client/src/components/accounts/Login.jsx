@@ -7,12 +7,19 @@ import { DataContext } from '../../context/DataProvider';
 
 import { useNavigate } from 'react-router-dom';
 
+import './Login.css'
+
+
 const  Component = styled(Box)`
     width:400px;
     margin:auto;
     box-shadow: 5px 2px 5px 2px rgb(0 0 0/ 0.2s);
     background-color:rgba(217,219,225,0.6);
     border-radius:10px;
+    display: flex;
+    margin-top: 75px;
+    justify-content: center;
+    align-items: center;
 `;
 
 const Image = styled('img')({
@@ -70,7 +77,7 @@ const signupInitialValues = {
     reva_srn:'',
     reva_mail:'',
 }
-const Login =() =>{
+const Login =({ isUserAuthenticated }) =>{
   
     const imageURL = 'https://revaeduin.s3.ap-south-1.amazonaws.com/uploads/images/1636545030_eb8e424b8c32ef9fc017.png';
   
@@ -118,6 +125,8 @@ const Login =() =>{
 
             setAccount({ username: response.data.username, reva_srn: response.data.reva_srn })
 
+            isUserAuthenticated(true);
+
             navigate('/');
 
         } else {
@@ -126,7 +135,9 @@ const Login =() =>{
     }
 
     return (
-        <Component>
+        <div className="back">
+        <Component >
+            
         <Box>
             <Image src={imageURL} alt="log"/>
             {
@@ -156,6 +167,7 @@ const Login =() =>{
             }
         </Box>
         </Component>
+        </div>
 
     )
 }
