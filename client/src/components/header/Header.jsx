@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const Component = styled(AppBar)`
     background: #FFFFFF;
     color: #000;
-    background-color:rgba(217,219,225,0.4);
+    background-color:rgba(217,219,225,0.01);
     * :hover{
         color: black;
         border: 1px solid #000;

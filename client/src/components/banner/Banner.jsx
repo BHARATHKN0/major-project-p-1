@@ -14,27 +14,28 @@ const Image = styled(Box)`
 `;
     
 const Heading = styled(Typography)`
-    font-size: 70px;
-    color: black;
+    font-size: 75px;
+    color: white;
     padding: 20px;
-    color: black;
     text-decoration: none;
     padding: 10px 20px;         
-    background-color:rgba(217,219,225,0.7);
+    background-color:rgba(0,0,0,0.6);
     border-radius: 20px; 
     line-height: 1;    
     margin-top: 40px;
 `;
 
 const SubHeading = styled(Typography)`
-    font-size: 20px;
+    font-size: 22px;
     text-decoration: none;
     padding: 10px 20px;  
-    margin-top: 5px;       
-    background-color:rgba(217,219,225,0.7);
+    margin-top: 5px;  
+    color: white;     
+    background-color:rgba(0,0,0,0.6);
     border-radius: 20px; 
     line-height: 1
-`
+    
+`;
 
 const Banner = () => {
 
