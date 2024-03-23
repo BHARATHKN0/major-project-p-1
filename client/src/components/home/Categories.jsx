@@ -3,7 +3,7 @@
 
 import { categories } from "../../constants/data";
 import { Button, Table, TableBody, TableHead, TableRow, TableCell, styled } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 
 const StyledTable = styled(Table)`
@@ -18,10 +18,19 @@ const StyledButton = styled(Button)`
     color: #fff;
 `
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color:inherit;
+    `
+
+
 const Categories = () => {
+
+    const [searchParams] = useSearchParams();
+    const category= searchParams.get('category');
     return (
         <>
-            <Link to='/createpost' style={{ textDecoration: 'none' }} >
+            <Link to={`/createpost?category=${category || ''}`}  >
             <StyledButton variant="contained" >Create Post</StyledButton>
             </Link>
 
@@ -29,7 +38,10 @@ const Categories = () => {
                 <TableHead>
                     <TableRow>
                         <TableCell>
+                            <StyledLink to='/'>
                             All Categories
+                            </StyledLink>
+                           
                         </TableCell>
                     </TableRow>
                 </TableHead>
@@ -39,7 +51,10 @@ const Categories = () => {
                         categories.map(category => (
                             <TableRow key={category.id} >
                                 <TableCell>
+                                    <StyledLink to={`/?category=${category.type}`}>
                                     { category.type }
+                                    </StyledLink>
+                                    
                                 </TableCell>
                             </TableRow>
                         ))
