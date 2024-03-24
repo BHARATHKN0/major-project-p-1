@@ -10,11 +10,15 @@ import {DataContext } from '../../context/DataProvider';
 
 import {API } from '../../service/api';
 
-const Container = styled(Box)`
-    margin: 65px 100px
-`;
+const Container = styled(Box)(({ theme }) => ({
+    margin: '65px 100px',
+    [theme.breakpoints.down('md')]: {
+        margin: 10
+    }
+}));
 
 const Image = styled('img')({
+    marginTop: '65px',
     width: '100%',
     height: '50vh',
     objectFit: 'cover',
@@ -113,7 +117,7 @@ const CreatePost = () => {
             <input type="file" id="fileInput" style={{ display: 'none' }} onChange={(e) => setFile(e.target.files[0])}/>
 
             <InputTextField placeholder="Title" onChange={(e) => handleChange(e)} name="title"/>
-        <Button variant="contained" onClick={() => savePost()}>Publish</Button>
+            <Button variant="contained" style={{ background: 'orange', borderRadius: '15px', color: '#fff' }} onClick={() => savePost()}>Publish</Button>
         </StyledFormControl>
 
         <Textarea
