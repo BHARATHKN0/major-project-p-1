@@ -15,7 +15,7 @@ const Image = styled(Box)`
     
 const Heading = styled(Typography)`
     font-size: 75px;
-    color: white;
+    color: blue;
     padding: 20px;
     text-decoration: none;
     padding: 10px 20px;         
@@ -42,7 +42,7 @@ const Banner = () => {
     return (
         <div>
         <Image className="image">
-            <Heading>INTERVIEW HUB</Heading>
+            <Heading>REVA UNIVERSITY</Heading>
             <SubHeading>A PLATFORM FOR SHARING INTERVIEW EXPERIENCE & EVENT MANAGEMENT</SubHeading>
         </Image>
         </div>

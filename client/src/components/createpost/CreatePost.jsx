@@ -70,20 +70,23 @@ const CreatePost = () => {
 
     useEffect(() => {
         const getImage = async () => {
-            if (file){
+            if (file) {
                 const data = new FormData();
                 data.append("name", file.name);
                 data.append("file", file);
-
+    
                 //API call
                 const response = await API.uploadFile(data);
-                post.picture = response.data;         
+                setPost(prevPost => ({...prevPost, picture: response.data})); // Update the post state          
             }
-        }
+        };
         getImage();
-        post.categories= location.search?.split("=")[1] || 'All';
-        post.username= account.username;
-    },[file])
+    setPost(prevPost => ({
+        ...prevPost,
+        categories: location.search?.split("=")[1] || 'All',
+        username: account.username
+    }));
+}, [file, location.search, account.username]);
 
 
     const handleChange = (e) => {
@@ -119,8 +122,6 @@ const CreatePost = () => {
             onChange={(e) => handleChange(e)}
             name="description"
         />
-            
-        <div>Hello from CreatePost</div>
         </Container>
         
     )
