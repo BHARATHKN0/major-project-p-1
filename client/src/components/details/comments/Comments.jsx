@@ -1,11 +1,12 @@
 
 // import DP from '../../../Assets/dp.jpg'
 
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Box, TextareaAutosize, Button, styled } from '@mui/material';
 import { DataContext } from '../../../context/DataProvider';
 import { API } from '../../../service/api'
 
+import Comment from './Comment';
 
 const Container = styled(Box)`
     margi-top: 100px;
@@ -38,7 +39,24 @@ export const Comments = ({ post }) => {
 
     const [ comment, setComment ] = useState(initialValues);
 
+    const [comments, setComments ] = useState([]);
+
+    const [ toggle, setToggle ] = useState(false);
+
     const { account } = useContext(DataContext);
+
+    useEffect (() => {
+        const getData = async () => {
+            const response = await API.getAllComments(post._id);
+            if (response.isSuccess) {
+                setComments(response.data);
+            }
+
+        }
+        if(post._id){
+            getData();
+         }
+    }, [post, toggle]) 
 
     const handleChange = (e) => {
         setComment({
@@ -54,6 +72,7 @@ export const Comments = ({ post }) => {
         if (response.isSuccess) {
             setComment(initialValues);
         }
+        setToggle(prevState => !prevState);
     }
 
     return (
@@ -76,7 +95,11 @@ export const Comments = ({ post }) => {
             </Container>
 
             <Box>
-
+                {
+                    comments && comments.length > 0 && comments.map(comment => (
+                        <Comment comment={comment} setToggle={setToggle} />
+                    ))
+                }
             </Box>
         </Box>
         // <div>This is comments</div>
