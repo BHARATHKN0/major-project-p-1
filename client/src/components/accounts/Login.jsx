@@ -40,7 +40,7 @@ const  Wrapper = styled(Box)`
 `;
 
 const LoginButton = styled(Button)`
-    text-transform:none;
+    text-transform: none;
     background: #FB641B;
     color:#fff;
     height:48px;
@@ -72,10 +72,10 @@ const loginInitialValues = {
 }
 
 const signupInitialValues = {
-    username:'',
-    password:'',
-    reva_srn:'',
-    reva_mail:'',
+    username: '',
+    password: '',
+    reva_srn: '',
+    reva_mail: ''
 }
 const Login =({ isUserAuthenticated }) =>{
   
@@ -95,8 +95,7 @@ const Login =({ isUserAuthenticated }) =>{
     }
 
     const onInputChange =(e) => {
-        setSignup({ ...signup, [e.target.name]: e.target.value});
-    }
+        setSignup(prevState => ({ ...prevState, [e.target.name]: e.target.value }))    }
 
     const signupUser = async () => {
          let response = await API.userSignup(signup);

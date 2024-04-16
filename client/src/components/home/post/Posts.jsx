@@ -1,48 +1,54 @@
 import { useEffect, useState } from "react";
-
-import { Box, Grid} from '@mui/material';
-
+import { Box, Grid } from '@mui/material';
 import { useSearchParams, Link } from "react-router-dom";
-
-import {API} from '../../../service/api';
-
+import { API } from '../../../service/api';
 import Post from './Post';
+import "./Posts.css";
 
-
-const Posts =()=>{
+const Posts = () => {
     const [posts, setPosts] = useState([]);
-
     const [searchParams] = useSearchParams();
     const category = searchParams.get('category');
 
-
     useEffect(() => {
         const fetchData = async () => {
-            let response = await API.getAllPosts({category : category || ''});
-            if(response.isSuccess) {
-                setPosts(response.data);
+            try {
+                const response = await API.getAllPosts({ category: category || '' });
+                if (response.isSuccess) {
+                    // Sort posts by createdDate in descending order (most recent first)
+                    const sortedPosts = response.data.sort((a, b) => {
+                        return new Date(b.createdDate) - new Date(a.createdDate);
+                    });
+                    setPosts(sortedPosts);
+                }
+            } catch (error) {
+                console.error('Error fetching posts:', error);
             }
-        }
+        };
         fetchData();
-    },[category])
+    }, [category]);
 
     return (
         <>
-            {
-                posts && posts.length > 0 ? posts.map(post => (
-                    <Grid item lg={3} sm={4} xs={12}>
-                        <Link to={`details/${post._id}`} style ={{textDecoration:'none', color:'inherit'}}>
-                            <Post post ={post}/>
+            {posts && posts.length > 0 ? (
+                <Grid container spacing={1}>
+                {posts.map((post) => (
+                    <Grid item key={post._id} lg={3} sm={4} xs={12}>
+                        <Link to={`details/${post._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <div className="post-container">
+                                <Post post={post} />
+                            </div>
                         </Link>
-                        
                     </Grid>
-                    
-                )): <Box Styled={{ color: '#878787', margin:'30px 80px', fontSize:18}}>No data available to display</Box>
-            }
+                ))}
+            </Grid>
+            ) : (
+                <Box style={{ color: '#878787', margin: '40px 80px', fontSize: 20 }}>
+                    No data available to display
+                </Box>
+            )}
         </>
-        
-    )
-
-}
+    );
+};
 
 export default Posts;

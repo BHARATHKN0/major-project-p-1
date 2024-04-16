@@ -6,22 +6,47 @@ import { Button, Table, TableBody, TableHead, TableRow, TableCell, styled } from
 import { Link, useSearchParams } from "react-router-dom";
 
 
-const StyledTable = styled(Table)`
-    border: 1px solid rgba(224, 224, 224, 1);
-`;
-
 const StyledButton = styled(Button)`
     margin: 20px;
-    width: 85%;
+    width: 92%;
     background: orange;
     border-radius: 15px;
     color: #fff;
-`
+`;
 
 const StyledLink = styled(Link)`
+    color: black;
     text-decoration: none;
-    color:inherit;
-    `
+    border-radius: 15px;
+`;
+
+const StyledTable = styled(Table)`
+    // border: 1px solid black;
+    border-radius: 15px;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: rgba(225, 225, 225, 1);
+    margin-left: 10px;
+    
+
+    & th,
+    & td {
+        padding: 19px;
+        
+        border-radius: 15px;
+        text-align: center;
+        transition: background-color 0.5s ease; /* Smooth transition for hover effect */
+        cursor: pointer; 
+        
+
+        &:hover {
+            border-radius: 15px;
+            background-color: orange;
+            transform: scale(1.01);
+            
+        }
+    }
+`;
 
 
 const Categories = () => {

@@ -1,40 +1,34 @@
-import { useContext } from "react";
-
-import { Box, Typography, styled } from "@mui/material";
-import { Delete } from "@mui/icons-material";
-
-import { DataContext } from "../../../context/DataProvider";
-import { API } from "../../../service/api";
-
+import { useContext } from 'react';
+import { Box, Typography, styled } from '@mui/material';
+import { Delete } from '@mui/icons-material';
+import { DataContext } from '../../../context/DataProvider';
+import { API } from '../../../service/api';
 
 const Component = styled(Box)`
-    margin-top: 30px;
-    background: #F5F5F5;
+    margin-top: 20px;
     padding: 10px;
-`
+    background-color: #f5f5f5;
+    border: 1px solid rgba(224, 224, 224, 0.7);
+    border-radius: 15px;
+`;
 
 const Container = styled(Box)`
     display: flex;
-    margin-bottom: 7px;
-`
+    align-items: center;
+    margin-bottom: 5px;
+`;
 
 const Name = styled(Typography)`
     font-weight: 600;
-    font-size: 18px;
-    margin-right: 20px;
+    margin-right: 10px;
 `;
-
-const StyledDate = styled(Typography)`
-    color: #878787;
-    font-size:14px;
-`
 
 const DeleteIcon = styled(Delete)`
     margin-left: auto;
-`
+    cursor: pointer;
+`;
 
 const Comment = ({ comment, setToggle }) => {
-
     const { account } = useContext(DataContext);
 
     const removeComment = async () => {
@@ -45,20 +39,42 @@ const Comment = ({ comment, setToggle }) => {
 
     }
 
-    return (
+    // Helper function to render comment text with clickable links
+    const renderCommentWithLinks = (commentText) => {
+        if (!commentText || typeof commentText !== 'string') {
+            return null;
+        }
 
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        return commentText.split(urlRegex).map((part, index) => {
+            if (part.match(urlRegex)) {
+                return (
+                    <a key={index} href={part} target="_blank" rel="noopener noreferrer">
+                        {part}
+                    </a>
+                );
+            }
+            return part;
+        });
+    };
+
+    return (
         <Component>
             <Container>
-                <Name>{comment.name}</Name>
-                <StyledDate>{new Date(comment.date).toDateString()}</StyledDate>
-                { comment.name === account.username && <DeleteIcon onClick={() => removeComment()} /> }
+                <Name>By: {comment.name}</Name>
+                <Typography variant="body2" color="textSecondary">
+                    {new Date(comment.date).toDateString()}
+                </Typography>
+                {comment.name === account.username && (
+                    <DeleteIcon onClick={() => removeComment()} />
+                )}
             </Container>
-            <Box>
-                <Typography>{comment.comments}</Typography>
-            </Box>
+            {/* Render comment text with clickable links */}
+            <Typography>
+                {renderCommentWithLinks(comment.comments)}
+            </Typography>
         </Component>
-    )
-}
-
+    );
+};
 
 export default Comment;

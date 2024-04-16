@@ -35,6 +35,8 @@ const InputTextField = styled(InputBase)`
     flex: 1;
     margin: 0 30px;
     font-size: 25px;
+    border: 3px solid rgba(225, 225, 225, 1);
+    border-radius: 10px;
 `;
 
 
@@ -43,9 +45,11 @@ const Textarea = styled(TextareaAutosize)`
     margin-top: 50px;
     font-size: 20px;
     border: none;
-    &:focus-visible {
-        outline: none;
-    }
+    border: 3px solid rgba(225, 225, 225, 1);
+    border-radius: 10px
+    // &:focus-visible {
+    //     outline: none;
+    // }
 `
 
 const initialPost ={
@@ -80,7 +84,7 @@ const Update = () => {
             }
         }
         fetchData();
-    }, [])
+    }, [id])
 
 
     useEffect(() => {

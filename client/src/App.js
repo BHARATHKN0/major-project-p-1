@@ -9,8 +9,8 @@ import Header from './components/header/Header';
 import CreatePost from './components/createpost/CreatePost';
 import DetailView from './components/details/DetailView'
 import Update from './components/createpost/Update';
-// import About from './components/about/About';
-// import Contact from './components/contact/Contact';
+import About from './components/about/About';
+import Contact from './components/contact/Contact';
 
 
 
@@ -55,13 +55,13 @@ function App() {
               <Route path='/update/:id' element={<Update />} />
             </Route>
 
-            {/* <Route path='/about' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
+            <Route path='/about' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
               <Route path='/about' element={<About />} />
             </Route>
 
             <Route path='/contact' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
               <Route path='/contact' element={<Contact />} />
-            </Route> */}
+            </Route>
 
           </Routes>
         </div>

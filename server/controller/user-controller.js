@@ -11,7 +11,7 @@ dotenv.config();
 export const signupUser = async (request, response) => {
     try {
         
-         const hashedPassword = await bcrypt.hash(request.body.password, 10);
+        const hashedPassword = await bcrypt.hash(request.body.password, 10);
         const user = {username:request.body.username, password:hashedPassword, reva_srn:request.body.reva_srn, reva_mail:request.body.reva_mail}
         // const user = request.body;
         // const user={username:request.body.name, password:hashedPassword, reva_srn:request.body.reva_srn, reva_mail:request.body.reva_mail}
@@ -35,6 +35,9 @@ export const loginUser = async (request, response) => {
 
     try {
         let match = await bcrypt.compare(request.body.password, user.password);
+        if (!match) {
+            return response.status(400).json({ msg: 'Invalid password' });
+        }
         if (match) {
             const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_SECRET_KEY, { expiresIn: '59m'});
             const refreshToken = jwt.sign(user.toJSON(), process.env.REFRESH_SECRET_KEY);

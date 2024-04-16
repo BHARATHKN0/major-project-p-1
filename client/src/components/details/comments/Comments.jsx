@@ -9,7 +9,7 @@ import { API } from '../../../service/api'
 import Comment from './Comment';
 
 const Container = styled(Box)`
-    margi-top: 100px;
+    margin-top: 100px;
     display: flex;
 `;
 
@@ -23,6 +23,8 @@ const StyledTextArea = styled(TextareaAutosize)`
     height: 100px;
     width: 100%;
     margin: 0 20px;
+    border: 2px solid rgba(225, 225, 225, 1);
+    border-radius: 10px
 `
 
 const initialValues = {
@@ -71,9 +73,11 @@ export const Comments = ({ post }) => {
         let response = await API.newComment(comment);
         if (response.isSuccess) {
             setComment(initialValues);
+            setToggle(prevState => !prevState);
         }
-        setToggle(prevState => !prevState);
+        // setToggle(prevState => !prevState);
     }
+
 
     return (
         <Box>
@@ -81,15 +85,15 @@ export const Comments = ({ post }) => {
                 <Image src={url} alt='dp' />
                 <StyledTextArea 
                     minRows={5}
-                    placeholder='Share your experience'
+                    placeholder=' Share your experience'
                     value={comment.comments}
                     onChange={(e) => handleChange(e)}
                 />
                 <Button 
                     variant="contained" 
-                    color="primary" 
+                    style={{ backgroundColor: 'orange', color: 'white', height: 40 }} 
                     size="medium" 
-                    style={{ height: 40 }} 
+                    // style={{ height: 40 }} 
                     onClick={(e) => addComment(e)}>
                 Post</Button>
             </Container>
@@ -97,6 +101,7 @@ export const Comments = ({ post }) => {
             <Box>
                 {
                     comments && comments.length > 0 && comments.map(comment => (
+                        
                         <Comment comment={comment} setToggle={setToggle} />
                     ))
                 }

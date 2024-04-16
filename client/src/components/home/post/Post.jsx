@@ -24,18 +24,32 @@ const Image = styled('img')({
 })
 
 const Text = styled(Typography)`
-    color: #878787
-    font-size:16px
+    color: #878787;
+    border: 1px solid rgba(224, 165, 0, 0.2);
+    // background-color: rgba(224, 165, 0, 0.1);
+    border-radius: 10px;
+    font-size:16px;
+`
+const Text1 = styled(Typography)`
+    color: black;
+    border: 1px solid rgba(224, 165, 0, 0.2);
+    background-color: rgba(224, 165, 0, 0.15);
+    border-radius: 10px;
+    font-size:16px;
+    
 `
 
+
 const Heading = styled(Typography)`
-    font-size: 20px;
-    font-wright:600;
+    font-size: 22px;
+    font-weight:600;
 `
 
 const Details = styled(Typography)`
     font-size:14px;
     word-break:break-word;
+    font-weight:600;
+
 `
 const  Post =({post}) =>{
 
@@ -43,11 +57,11 @@ const  Post =({post}) =>{
 
     return (
         <Container>
-            <Image src={url} alt="blog"/>
-            <Text>{post.categories}</Text>
+            <Image src={url} alt="post"/>
+            <Text1>{post.categories}</Text1>
             <Heading>{addElipsis(post.title, 25)}</Heading>
-            <Text>{post.username}</Text>
-            <Details>{addElipsis(post.description,100)}</Details>
+            <Text>By: {post.username}</Text>
+            <Details>Description: {addElipsis(post.description,100)}</Details>
 
         </Container>
     )
