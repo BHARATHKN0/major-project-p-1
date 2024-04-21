@@ -16,13 +16,13 @@ const Component = styled(AppBar)`
 
 const Container = styled(Toolbar)`
     justify-content: center;
-    gap: 20px;
+    gap: 15px;
     
     & > a {
-        padding: 20px;
+        
         color: white;
         text-decoration: none;
-        padding: 10px 20px;
+        padding: 10px 10px;
         background: orange;
         border-radius: 20px; 
         justify-content: space-around;
@@ -72,7 +72,7 @@ const Header = () => {
 
             </Container>
             <div style={{ marginTop: '-60px', marginBottom: '2px' }}>
-            <Username> <Image src={url} alt='dp' />{account.username}</Username>
+            <Username sx={{ display: { xs: 'none', sm: 'flex' } }} > <Image src={url} alt='dp' />{account.username}</Username>
 
             </div>
 

@@ -1,45 +1,81 @@
-import { Box, styled, Typography, Link } from '@mui/material';
-import { GitHub, Instagram, Email } from '@mui/icons-material';
-
-const Banner = styled(Box)`
-    background-image: url(http://mrtaba.ir/image/bg2.jpg);
-    width: 100%;
-    height: 50vh;
-    background-position: left 0px top -100px;
-    background-size: cover;
-`;
-
-const Wrapper = styled(Box)`
-    padding: 20px;
-    & > h3, & > h5 {
-        margin-top: 50px;
-    }
-`;
-
-const Text = styled(Typography)`
-    color: #878787;
-`;
+import React from 'react'
+import './Contact.css'
+import emailjs from '@emailjs/browser';
+import { useRef } from 'react';
+import { useState } from 'react';
+import Footer from '../footer/Footer';
 
 
 const Contact = () => {
-    return (
-        <Box>
-            <Banner />
-            <Wrapper>
-                <Typography variant="h3">Getting in touch is easy!</Typography>    
-                <Text variant="h5">
-                    Reach out to me on
-                    <Link href="https://www.instagram.com/codeforinterview/" color="inherit" target="_blank">
-                        <Instagram/>
-                    </Link>
-                    or send me an Email 
-                    <Link href="mailto:codeforinterview@gmail.com?Subject=This is a subject" target="_blank" color="inherit">
-                        <Email />
-                    </Link>.
-                </Text>
-            </Wrapper>
-        </Box>
-    );
+
+
+  const formRef = useRef();
+  const [done, setDone] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('');
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(formRef.current);
+
+    // Check if any required fields are empty
+    let hasEmptyFields = false;
+    formData.forEach((value, key) => {
+      if (!value.trim()) {
+        hasEmptyFields = true;
+      }
+    });
+
+    if (hasEmptyFields) {
+        setErrorMessage('Please fill in all fields.');
+        return;
+      }
+
+
+
+    emailjs.sendForm('service_94avhq4', 'template_hjamuyn', formRef.current, { publicKey: 'tdyh38zb1CSSe5j6_', })
+      .then((result) => {
+          console.log(result.text);
+          setDone(true);
+          setErrorMessage('');
+      }, (error) => {
+          console.log(error.text);
+      });
+  };
+
+
+  return (
+    <>
+    <div className='head'>
+        <span>User feedback is valuable please reach out us for improvements</span>
+    </div>
+    <div className='contact-form' id='Contact'>
+        <div className='w-left'>
+            <div className="awesome">
+                <span>Get In Touch</span>
+                <span style={{ color: "orange" }} >Contact Us</span>
+                <div className='blur s-blur1' style={{background:"orange"}}></div>
+            </div>
+        </div>
+      
+      <div className="c-right">
+        <form ref={formRef} onSubmit={sendEmail}>
+            <input type='text' name="user_name" className='user' placeholder='Name'/>
+            <input type='email' name="user_email" className='user' placeholder='Email'/>
+            <textarea name='message' className='user' placeholder='Message' />
+            <input type='submit' value="Send" className='button' />
+            {errorMessage && <span className="error-message">{errorMessage}</span>}
+
+            {done && <span className="success-message">Thanks for contacting me!</span>}
+
+            <div className='blur c-blur1' style={{background:"purple"}}></div>
+
+
+        </form>
+      </div>
+    </div>
+    <Footer />
+    </>
+  )
 }
 
-export default Contact;
+export default Contact

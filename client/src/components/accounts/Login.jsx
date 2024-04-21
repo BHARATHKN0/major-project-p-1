@@ -141,7 +141,19 @@ const Login =({ isUserAuthenticated }) =>{
             <Image src={imageURL} alt="log"/>
             {
                 account === 'login' ?
-                    <Wrapper>
+                <Wrapper>
+                <TextField variant="standard" onChange={(e) => onInputChange(e)} name='username' label ="Enter username"/>
+                <TextField variant="standard" onChange={(e) => onInputChange(e)} name='password' label="Enter password"/>  
+                <TextField variant="standard" onChange={(e) => onInputChange(e)} name='reva_srn' label ="Enter srn"/> 
+                <TextField variant="standard" onChange={(e) => onInputChange(e)} name='reva_mail' label="Enter reva mail id "/>
+                
+                {error && <Error>{error}</Error>}
+                <SignupButton variant="contained" onClick={() => signupUser()}>SignUp</SignupButton>
+                <Text style={{ textAlign:'center'}}>OR</Text>
+                <LoginButton variant="contained" onClick={() => toggleSignup()}>Already have an account</LoginButton>
+            </Wrapper>
+                :
+                <Wrapper>
                         <TextField variant="standard" value={login.username} onChange={(e) => onvaluechange(e)} name='username' label ="Enter username"/>
                         <TextField variant="standard" value={login.password} onChange={(e) => onvaluechange(e)} name='password' label="Enter password"/>
 
@@ -151,18 +163,6 @@ const Login =({ isUserAuthenticated }) =>{
                         <Text style={{ textAlign:'center'}}>OR</Text>
                         <SignupButton variant="contained" onClick={() => toggleSignup()}>Create an account</SignupButton>
                     </Wrapper> 
-                :
-                <Wrapper>
-                    <TextField variant="standard" onChange={(e) => onInputChange(e)} name='username' label ="Enter username"/>
-                    <TextField variant="standard" onChange={(e) => onInputChange(e)} name='password' label="Enter password"/>  
-                    <TextField variant="standard" onChange={(e) => onInputChange(e)} name='reva_srn' label ="Enter srn"/> 
-                    <TextField variant="standard" onChange={(e) => onInputChange(e)} name='reva_mail' label="Enter reva mail id "/>
-                    
-                    {error && <Error>{error}</Error>}
-                    <SignupButton variant="contained" onClick={() => signupUser()}>SignUp</SignupButton>
-                    <Text style={{ textAlign:'center'}}>OR</Text>
-                    <LoginButton variant="contained" onClick={() => toggleSignup()}>Already have an account</LoginButton>
-                </Wrapper>
             }
         </Box>
         </Component>

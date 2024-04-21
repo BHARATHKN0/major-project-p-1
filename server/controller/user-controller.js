@@ -1,18 +1,17 @@
 
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 
 import User from '../model/user.js';
 import Token from '../model/token.js';
-
+import dotenv from 'dotenv';
 dotenv.config();
 
 export const signupUser = async (request, response) => {
     try {
         
         const hashedPassword = await bcrypt.hash(request.body.password, 10);
-        const user = {username:request.body.username, password:hashedPassword, reva_srn:request.body.reva_srn, reva_mail:request.body.reva_mail}
+        const user = { username: request.body.username, password: hashedPassword, reva_srn: request.body.reva_srn, reva_mail: request.body.reva_mail}
         // const user = request.body;
         // const user={username:request.body.name, password:hashedPassword, reva_srn:request.body.reva_srn, reva_mail:request.body.reva_mail}
 

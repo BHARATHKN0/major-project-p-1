@@ -16,7 +16,8 @@ const Image = styled(Box)`
 const Heading = styled(Typography)`
     font-size: 75px;
     color: white;
-    padding: 20px;
+    align-items: center;
+    flex-direction: column;
     text-decoration: none;
     padding: 10px 20px;         
     background-color:rgba(0,0,0,0.6);

@@ -44,7 +44,7 @@ const Posts = () => {
             </Grid>
             ) : (
                 <Box style={{ color: '#878787', margin: '40px 80px', fontSize: 20 }}>
-                    No data available to display
+                    No data available to display on this category
                 </Box>
             )}
         </>

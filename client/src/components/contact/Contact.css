@@ -1,0 +1,103 @@
+.contact-form{
+    padding: 0 3rem 0 3rem;
+    display: flex;
+    height: 95vh;
+    margin-top: 3rem;
+
+    background-image: url('../../Assets/logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    
+}
+
+.c-right{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex: 1;
+}
+
+.c-right>form{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.c-right .user{
+    width: 20rem;
+    height: 2rem;
+    padding: 0.3em;
+    outline: none;
+    border: 2px solid orange;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+textarea{
+    height: 4rem!important;
+}
+
+.c-blur1{
+    top: 1rem;
+    left: 8rem;
+}
+
+.button {
+    background-color: orange;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: 550;
+    transition: transform 0.3s ease; /* Add transition for smooth scaling */
+
+    /* Hover effect */
+    &:hover {
+        transform: scale(1.1); /* Scale up by 10% on hover */
+    }
+}
+
+.w-left {
+     /* Adjust the width of the left section */
+    padding: 20px;
+}
+
+.awesome {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff; /* Set a white background for the text section */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+
+.awesome span {
+    display: block; /* Display spans as block to stack vertically */
+    font-size: 30px; /* Set font size */
+    font-weight: bold;
+    margin-bottom: 10px; /* Add spacing between spans */
+}
+
+.head {
+    margin-top: 74px;
+    font-size: 22px;
+    font-weight: 600;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+@media screen and (max-width:480px) {
+    .contact-form{
+        padding: 0;
+        flex-direction: column;
+        gap: 5rem;
+        height: 40rem;
+    }
+    .c-right .user{
+        width: 16rem;
+    }
+}

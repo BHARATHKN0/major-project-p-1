@@ -1,0 +1,41 @@
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: -340px;
+    overflow: hidden; /* Hide overflow to prevent horizontal scrolling */
+  }
+  
+  .f-content {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 50px;
+    gap: 2rem; /* Reduce the gap between elements for mobile */
+  }
+  
+  .f-icons {
+    display: flex;
+    gap: 1.5rem; /* Reduce the gap between icons for mobile */
+  }
+  
+  @media screen and (max-width: 480px) {
+    .f-content {
+      transform: scale(0.8); /* Adjust the scale to fit mobile screens */
+    }
+  
+    .f-icons {
+      /* flex-direction: column; Stack icons vertically on mobile */
+      align-items: center; /* Center icons horizontally on mobile */
+      gap: 1rem; /* Reduce the gap between vertically stacked icons */
+
+    }
+    .footer {
+        margin-top: -180px;
+    }
+  }
+  
