@@ -27,7 +27,7 @@
   .slider__image {
     width: 50%; /* Image occupies half of the row */
     max-width: 100%; /* Ensure image does not exceed container width */
-    border-radius: 20px; /* Optional: Add rounded corners to the image */
+    border-radius: 25px; /* Optional: Add rounded corners to the image */
 
   }
   
@@ -39,9 +39,10 @@
   }
   
   .slider__title {
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 28px;
+    font-weight: 750;
     margin-bottom: 10px;
+    color: orange;
   }
   
   @media screen and (max-width: 800px) {

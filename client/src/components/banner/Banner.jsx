@@ -43,7 +43,7 @@ const Banner = () => {
     return (
         <div>
         <Image className="image">
-            <Heading>INTERVIEW HUB</Heading>
+            <Heading>CAMPUS CONNECT</Heading>
             <SubHeading>A PLATFORM FOR SHARING INTERVIEW EXPERIENCE & EVENT MANAGEMENT</SubHeading>
         </Image>
         </div>
