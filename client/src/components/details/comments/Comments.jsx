@@ -93,7 +93,6 @@ export const Comments = ({ post }) => {
                     variant="contained" 
                     style={{ backgroundColor: 'orange', color: 'white', height: 40 }} 
                     size="medium" 
-                    // style={{ height: 40 }} 
                     onClick={(e) => addComment(e)}>
                 Post</Button>
             </Container>
@@ -107,7 +106,6 @@ export const Comments = ({ post }) => {
                 }
             </Box>
         </Box>
-        // <div>This is comments</div>
     )
 }
 

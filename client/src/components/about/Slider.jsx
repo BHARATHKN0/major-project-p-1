@@ -16,8 +16,6 @@ import GYM from '../../Assets/gym.jpg'
 import Auditorium from '../../Assets/auditorium.jpg'
 import Cover1 from '../../Assets/cover3.jpg'
 
-
-
 const Slider = () => {
   const { ref, inView } = useInView({
     threshold: 0.4,
@@ -133,7 +131,7 @@ const Slider = () => {
       description: (
         <div>
           <p> The housing blocks at REVA University are designed with a focus on aesthetics and functionality, set within a picturesque landscape of lush greenery. These well-planned residential spaces offer students a serene and comfortable living environment that complements their academic journey. </p>
-          <p> Each housing block is thoughtfully crafted to provide modern amenities and facilities that enhance student life, fostering a sense of community and belonging. Surrounded by natural beauty, the housing blocks serve as more than just accommodation; they are spaces that inspire creativity, relaxation, and social interaction. </p>
+          <p> Each housing block is thoughtfully crafted to provide modern amenities and facilities that enhance student life, fostering a sense of community and belonging. Surrounded by natural beauty, the housing blocks serve as more than just accommodation, they are spaces that inspire creativity, relaxation, and social interaction. </p>
         </div>
       ),
       image: Hostel,

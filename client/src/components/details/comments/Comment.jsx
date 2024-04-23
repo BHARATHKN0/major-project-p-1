@@ -40,23 +40,35 @@ const Comment = ({ comment, setToggle }) => {
     }
 
     // Helper function to render comment text with clickable links
-    const renderCommentWithLinks = (commentText) => {
-        if (!commentText || typeof commentText !== 'string') {
-            return null;
-        }
+    // Helper function to render comment text with clickable links and line breaks
+const renderCommentWithLinks = (commentText) => {
+    if (!commentText || typeof commentText !== 'string') {
+        return null;
+    }
 
-        const urlRegex = /(https?:\/\/[^\s]+)/g;
-        return commentText.split(urlRegex).map((part, index) => {
-            if (part.match(urlRegex)) {
-                return (
-                    <a key={index} href={part} target="_blank" rel="noopener noreferrer">
-                        {part}
-                    </a>
-                );
-            }
-            return part;
-        });
-    };
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return commentText.split(urlRegex).map((part, index) => {
+        if (part.match(urlRegex)) {
+            return (
+                <a key={index} href={part} target="_blank" rel="noopener noreferrer">
+                    {part}
+                </a>
+            );
+        }
+        // Replace '\n' with <br> to render line breaks
+        return (
+            <span key={index}>
+                {part.split('\n').map((line, i) => (
+                    <span key={`${index}-${i}`}>
+                        {line}
+                        {i < part.split('\n').length - 1 && <br />} {/* Add <br> except for the last line */}
+                    </span>
+                ))}
+            </span>
+        );
+    });
+};
+
 
     return (
         <Component>
