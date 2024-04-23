@@ -11,7 +11,7 @@ export const signupUser = async (request, response) => {
     try {
         
         const hashedPassword = await bcrypt.hash(request.body.password, 10);
-        const user = { username: request.body.username, password: hashedPassword, reva_srn: request.body.reva_srn, reva_mail: request.body.reva_mail}
+        const user = { full_name:request.body.full_name, reva_srn: request.body.reva_srn, reva_branch: request.body.reva_branch, reva_mail: request.body.reva_mail, username: request.body.username, password: hashedPassword, }
         // const user = request.body;
         // const user={username:request.body.name, password:hashedPassword, reva_srn:request.body.reva_srn, reva_mail:request.body.reva_mail}
 

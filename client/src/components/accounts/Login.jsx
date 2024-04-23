@@ -68,10 +68,12 @@ const loginInitialValues = {
 };
 
 const signupInitialValues = {
-    username: '',
-    password: '',
+    full_name:'',
     reva_srn: '',
+    reva_branch:'',
     reva_mail: '',
+    username: '',
+    password: ''
 };
 
 const Login = ({ isUserAuthenticated }) => {
@@ -109,6 +111,14 @@ const Login = ({ isUserAuthenticated }) => {
         }
         if (!signup.reva_mail) {
             errors.reva_mail = 'Please enter Reva mail ID';
+            isValid = false;
+        }
+        if (!signup.reva_branch) {
+            errors.reva_branch = 'Please enter Branch';
+            isValid = false;
+        }
+        if (!signup.full_name) {
+            errors.full_name = 'Please enter Full Name';
             isValid = false;
         }
 
@@ -203,6 +213,43 @@ const Login = ({ isUserAuthenticated }) => {
                         <Wrapper>
                             <TextField
                                 variant="standard"
+                                value={signup.full_name}
+                                onChange={(e) => setSignup({ ...signup, full_name: e.target.value })}
+                                name="full_name"
+                                label="Enter Full  Name"
+                                error={!!signupErrors.full_name}
+                                helperText={signupErrors.full_name}
+                            />
+                            <TextField
+                                variant="standard"
+                                value={signup.reva_srn}
+                                onChange={(e) => setSignup({ ...signup, reva_srn: e.target.value })}
+                                name="reva_srn"
+                                label="Enter SRN"
+                                error={!!signupErrors.reva_srn}
+                                helperText={signupErrors.reva_srn}
+                            />
+                            <TextField
+                                variant="standard"
+                                value={signup.reva_branch}
+                                onChange={(e) => setSignup({ ...signup, reva_branch: e.target.value })}
+                                name="reva_branch"
+                                label="Enter Branch"
+                                type="text"
+                                error={!!signupErrors.reva_branch}
+                                helperText={signupErrors.reva_branch}
+                            />
+                            <TextField
+                                variant="standard"
+                                value={signup.reva_mail}
+                                onChange={(e) => setSignup({ ...signup, reva_mail: e.target.value })}
+                                name="reva_mail"
+                                label="Enter Reva mail ID"
+                                error={!!signupErrors.reva_mail}
+                                helperText={signupErrors.reva_mail}
+                            />
+                            <TextField
+                                variant="standard"
                                 value={signup.username}
                                 onChange={(e) => setSignup({ ...signup, username: e.target.value })}
                                 name="username"
@@ -220,24 +267,8 @@ const Login = ({ isUserAuthenticated }) => {
                                 error={!!signupErrors.password}
                                 helperText={signupErrors.password}
                             />
-                            <TextField
-                                variant="standard"
-                                value={signup.reva_srn}
-                                onChange={(e) => setSignup({ ...signup, reva_srn: e.target.value })}
-                                name="reva_srn"
-                                label="Enter SRN"
-                                error={!!signupErrors.reva_srn}
-                                helperText={signupErrors.reva_srn}
-                            />
-                            <TextField
-                                variant="standard"
-                                value={signup.reva_mail}
-                                onChange={(e) => setSignup({ ...signup, reva_mail: e.target.value })}
-                                name="reva_mail"
-                                label="Enter Reva mail ID"
-                                error={!!signupErrors.reva_mail}
-                                helperText={signupErrors.reva_mail}
-                            />
+                            
+                            
                             {error && <Error>{error}</Error>}
                             <SignupButton variant="contained" onClick={signupUser}>
                                 SignUp
