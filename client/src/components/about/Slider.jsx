@@ -240,10 +240,10 @@ const Slider = () => {
       title: "About Website",
       description: (
         <div style={{ fontSize: '18px' }}>
-          <p>• Campus Connect is a revolutionary web-based platform to empower students in bridging the transition from academia to the professional world. Recognizing the challenges students face in translating academic knowledge into practical career success, Campus Connect serves as a vital resource offering mentorship, career insights. </p>
-          <p>• At the core of Campus Connect is an extensive alumni directory, connecting students with seasoned professionals across diverse industries. Nurturing a supportive community where students can explore career paths and gain industry insights. </p>
+          <p>• Campus Connect is a revolutionary web-based platform to empower students in bridging the transition from academia to the professional world. Recognizing the challenges students face in academic knowledge into practical career success, Campus Connect serves as a vital resource offering mentorship, career insights. </p>
+          <p>• At the core of Campus Connect is an extensive alumni directory, connecting students with seasoned professionals across diverse industries. Nurturing a supportive community students can explore career paths and gain industry insight. </p>
           <p>• Campus Connect fosters meaningful engagement between students and alumni, facilitating discussions on industry trends and job opportunities. The platform also features a repository of interview experiences, offering perspectives on interview techniques and common questions. </p>
-          <p>• Campus Connect keeps students informed about career-related events, from job fairs to workshops, tailored to their interests and majors. The platform's user-friendly interface ensures seamless access across devices, enabling students to navigate resources effortlessly and stay engaged with their professional development. </p>
+          <p>• Campus Connect keeps students informed about career-related events, from job fairs to workshops, tailored to their interests and majors. The platform's user-friendly interface ensures seamless access across devices, enabling students to navigate resources effortlessly and stay engaged with their professional career. </p>
           <p>• By leveraging Campus Connect, students gain the confidence, skills, and connections needed to excel in their job search and future careers. This innovative platform commitment to preparing students for the challenges of the modern workforce, fostering a culture of continuous learning and career readiness. </p>
         </div>
       ),

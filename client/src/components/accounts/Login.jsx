@@ -9,29 +9,29 @@ const Component = styled(Box)`
     width: 400px;
     margin: auto;
     box-shadow: 5px 2px 5px 2px rgb(0 0 0 / 0.2s);
-    background-color: rgba(217, 219, 225, 0.6);
+    background-color: rgba(217, 219, 225, 0.8);
     border-radius: 10px;
     display: flex;
-    margin-top: 75px;
+    margin-top: 60px;
     justify-content: center;
     align-items: center;
 `;
 
 const Image = styled('img')({
-    width: '100%',
+    width: '60%',
     margin: 'auto',
     display: 'flex',
 });
 
 const Wrapper = styled(Box)`
-    padding: 25px 35px;
+    padding: 20px 30px;
     display: flex;
     flex-direction: column;
     box-shadow: 5px 2px 5px 2px rgb(0 0 0 / 0.5);
     & > div,
     & > button,
     & > p {
-        margin-top: 20px;
+        margin-top: 15px;
     }
 `;
 
@@ -39,16 +39,16 @@ const LoginButton = styled(Button)`
     text-transform: none;
     background: #fb641b;
     color: #fff;
-    height: 48px;
-    border-radius: 8px;
+    height: 40px;
+    border-radius: 10px;
 `;
 
 const SignupButton = styled(Button)`
     text-transform: none;
     background: #fb641b;
     color: black;
-    height: 48px;
-    border-radius: 8px;
+    height: 40px;
+    border-radius: 10px;
 `;
 
 const Error = styled(Typography)`
@@ -93,6 +93,28 @@ const Login = ({ isUserAuthenticated }) => {
         toggleAccount(account === 'signup' ? 'login' : 'signup');
     };
 
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        const revaEmailRegex = /^[^\s@]+@.*\.reva\.edu\.in$/;
+        return emailRegex.test(email) && revaEmailRegex.test(email);
+    };
+
+    const validateSRN = (srn) => {
+        const srnRegex = /^[A-Za-z][0-9]{2}[A-Za-z]{2}[0-9]{3}$/;
+        return srnRegex.test(srn) && srn.length === 8;
+    };
+
+    const validatePassword = (password) => {
+        const passwordRegex = /^[A-Za-z0-9]*$/;
+        return passwordRegex.test(password);
+    };
+
+    const validateBranch = (branch) => {
+        const branchRegex = /^[A-Za-z\s]+$/;
+        return branchRegex.test(branch);
+    };
+
+
     const validateSignup = () => {
         const errors = {};
         let isValid = true;
@@ -104,19 +126,31 @@ const Login = ({ isUserAuthenticated }) => {
         if (!signup.password) {
             errors.password = 'Please enter a password';
             isValid = false;
+        } else if (!validatePassword(signup.password)) {
+            errors.password = 'Special characters not allowed';
+            isValid = false;
         }
         if (!signup.reva_srn) {
             errors.reva_srn = 'Please enter SRN';
+            isValid = false;
+        } else if (!validateSRN(signup.reva_srn)) {
+            errors.reva_srn = 'Invalid SRN';
             isValid = false;
         }
         if (!signup.reva_mail) {
             errors.reva_mail = 'Please enter Reva mail ID';
             isValid = false;
-        }
-        if (!signup.reva_branch) {
-            errors.reva_branch = 'Please enter Branch';
+        } else if (!validateEmail(signup.reva_mail)) {
+            errors.reva_mail = 'Invalid Reva mail ID';
             isValid = false;
-        }
+    }
+    if (!signup.reva_branch) {
+        errors.reva_branch = 'Please enter Branch';
+        isValid = false;
+    } else if (!validateBranch(signup.reva_branch)) {
+        errors.reva_branch = 'Branch should contain only alphabets';
+        isValid = false;
+    }
         if (!signup.full_name) {
             errors.full_name = 'Please enter Full Name';
             isValid = false;
@@ -147,22 +181,47 @@ const Login = ({ isUserAuthenticated }) => {
         if (!validateSignup()) {
             return;
         }
+    
+        try {
 
-        let response = await API.userSignup(signup);
-        if (response.isSuccess) {
-            setSignup(signupInitialValues);
-            toggleAccount('login');
-        } else {
-            setError('Something went wrong! Please try again later');
+
+            // Check if SRN already exists
+            try {
+                let srnResponse = await API.checkSRN(signup.reva_srn);
+                if (srnResponse.data.exists) {
+                    setError('SRN already exists');
+                    return;
+                }
+            } catch (error) {
+                console.error('Error checking SRN:', error);
+                setError('Please Use unique values in "ALL FIELDS"');
+                return;
+            }
+    
+            // If all validations pass, proceed with user signup
+            let response = await API.userSignup(signup);
+            if (response.isSuccess) {
+                setSignup(signupInitialValues);
+                toggleAccount('login');
+            } else {
+                setError('Something went wrong! Please try again later4');
+            }
+        } catch (error) {
+            console.error('Error signing up:', error);
+            setError('Something went wrong! Please try again later5');
         }
     };
+    
+    
 
     const loginUser = async () => {
         if (!validateLogin()) {
             return;
         }
 
-        let response = await API.userLogin(login);
+        let response;
+    try {
+        response = await API.userLogin(login);
         if (response.isSuccess) {
             sessionStorage.setItem('accessToken', `Bearer ${response.data.accessToken}`);
             sessionStorage.setItem('refreshToken', `Bearer ${response.data.refreshToken}`);
@@ -170,8 +229,11 @@ const Login = ({ isUserAuthenticated }) => {
             isUserAuthenticated(true);
             navigate('/');
         } else {
-            setError('Something went wrong! Please try again later');
+            throw new Error(response.message || 'Something went wrong! Please try again later1');
         }
+    } catch (error) {
+        setError(error.message || 'Invalid Username or Password');
+    }
     };
 
     return (

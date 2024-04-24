@@ -3,8 +3,7 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
   full_name:{
     type:String,
-    required: true,
-    unique:true
+    required: true
     
   },
   reva_srn:{
@@ -15,8 +14,7 @@ const userSchema = new mongoose.Schema({
   },
   reva_branch:{
     type:String,
-    required: true,
-    unique:true
+    required: true
     
   },
   reva_mail:{
