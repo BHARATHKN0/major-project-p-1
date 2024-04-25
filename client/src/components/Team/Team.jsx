@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "@mui/material";
 import './Team.css'
 import Shashi from "../../Assets/shashi.jpg";
-import Image2 from "../../Assets/dp.jpg";
+import Harshith from "../../Assets/harshith.png";
 import Thejesh from "../../Assets/thejesh.png";
 import Bharath from "../../Assets/bharath1.png";
 
@@ -16,7 +16,7 @@ const Team = () => {
     <h1 className="team-title">ABOUT TEAM</h1>
     <div className="image-container">
       <div className="image-wrapper">
-        <Image src={Image2} alt="Image 1" className="round-image" />
+        <Image src={Harshith} alt="Image 1" className="round-image" />
         <div className="image-info">
           <h3>K V SAI HARSHITH</h3>
           <p>R20EJ024</p>
