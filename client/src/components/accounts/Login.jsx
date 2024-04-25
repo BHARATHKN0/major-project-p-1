@@ -3,6 +3,7 @@ import { Box, TextField, Button, styled, Typography } from '@mui/material';
 import { API } from '../../service/api';
 import { DataContext } from '../../context/DataProvider';
 import { useNavigate } from 'react-router-dom';
+import Toast from '../Toast/Toast';
 import './Login.css';
 
 const Component = styled(Box)`
@@ -123,6 +124,7 @@ const Login = ({ isUserAuthenticated }) => {
             errors.username = 'Please enter a username';
             isValid = false;
         }
+
         if (!signup.password) {
             errors.password = 'Please enter a password';
             isValid = false;
@@ -130,6 +132,7 @@ const Login = ({ isUserAuthenticated }) => {
             errors.password = 'Special characters not allowed';
             isValid = false;
         }
+
         if (!signup.reva_srn) {
             errors.reva_srn = 'Please enter SRN';
             isValid = false;
@@ -137,25 +140,28 @@ const Login = ({ isUserAuthenticated }) => {
             errors.reva_srn = 'Invalid SRN';
             isValid = false;
         }
+
         if (!signup.reva_mail) {
             errors.reva_mail = 'Please enter Reva mail ID';
             isValid = false;
         } else if (!validateEmail(signup.reva_mail)) {
             errors.reva_mail = 'Invalid Reva mail ID';
             isValid = false;
-    }
-    if (!signup.reva_branch) {
-        errors.reva_branch = 'Please enter Branch';
-        isValid = false;
-    } else if (!validateBranch(signup.reva_branch)) {
-        errors.reva_branch = 'Branch should contain only alphabets';
-        isValid = false;
-    }
+        }
+
+        if (!signup.reva_branch) {
+            errors.reva_branch = 'Please enter Branch';
+            isValid = false;
+        } else if (!validateBranch(signup.reva_branch)) {
+            errors.reva_branch = 'Branch should contain only alphabets';
+            isValid = false;
+        }
+
         if (!signup.full_name) {
             errors.full_name = 'Please enter Full Name';
             isValid = false;
         }
-
+    
         setSignupErrors(errors);
         return isValid;
     };
@@ -177,38 +183,25 @@ const Login = ({ isUserAuthenticated }) => {
         return isValid;
     };
 
+    const [successMessage, setSuccessMessage] = useState('');
     const signupUser = async () => {
         if (!validateSignup()) {
             return;
         }
     
         try {
-
-
-            // Check if SRN already exists
-            try {
-                let srnResponse = await API.checkSRN(signup.reva_srn);
-                if (srnResponse.data.exists) {
-                    setError('SRN already exists');
-                    return;
-                }
-            } catch (error) {
-                console.error('Error checking SRN:', error);
-                setError('Please Use unique values in "ALL FIELDS"');
-                return;
-            }
-    
             // If all validations pass, proceed with user signup
             let response = await API.userSignup(signup);
             if (response.isSuccess) {
                 setSignup(signupInitialValues);
                 toggleAccount('login');
+                setSuccessMessage('Signup successful! Please log in.');
             } else {
                 setError('Something went wrong! Please try again later4');
             }
         } catch (error) {
             console.error('Error signing up:', error);
-            setError('Something went wrong! Please try again later5');
+            setError('Something went wrong! Please use valid and unique values in all fields');
         }
     };
     
@@ -234,7 +227,8 @@ const Login = ({ isUserAuthenticated }) => {
     } catch (error) {
         setError(error.message || 'Invalid Username or Password');
     }
-    };
+
+};
 
     return (
         <div className="back">
@@ -343,7 +337,9 @@ const Login = ({ isUserAuthenticated }) => {
                     )}
                 </Box>
             </Component>
+            {successMessage && <Toast message={successMessage} onClose={() => setSuccessMessage('')} />}
         </div>
+        
     );
 };
 

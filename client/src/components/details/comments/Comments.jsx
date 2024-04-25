@@ -23,9 +23,14 @@ const StyledTextArea = styled(TextareaAutosize)`
     height: 100px;
     width: 100%;
     margin: 0 20px;
-    border: 2px solid rgba(225, 225, 225, 1);
+    border: 2px solid orange;
     border-radius: 10px
 `
+
+const ErrorText = styled('div')`
+    color: red;
+    margin-top: 5px;
+`;
 
 const initialValues = {
     name: '',
@@ -44,6 +49,8 @@ export const Comments = ({ post }) => {
     const [comments, setComments ] = useState([]);
 
     const [ toggle, setToggle ] = useState(false);
+
+    const [error, setError] = useState('');
 
     const { account } = useContext(DataContext);
 
@@ -70,10 +77,18 @@ export const Comments = ({ post }) => {
     }
 
     const addComment = async (e) => {
+            // Check if the comments field is empty
+        if (comment.comments.trim() === '') {
+        // Display error message and prevent submission
+        console.log("Please fill the field.");
+        setError('Please fill the field.');
+        return;
+    }
         let response = await API.newComment(comment);
         if (response.isSuccess) {
             setComment(initialValues);
             setToggle(prevState => !prevState);
+            setError(''); // Reset error state
         }
         // setToggle(prevState => !prevState);
     }
@@ -96,6 +111,8 @@ export const Comments = ({ post }) => {
                     onClick={(e) => addComment(e)}>
                 Post</Button>
             </Container>
+            {error && <ErrorText>{error}</ErrorText>}
+
 
             <Box>
                 {

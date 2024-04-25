@@ -14,29 +14,21 @@ import NCC from '../../Assets/ncc.jpg'
 import Tradi from '../../Assets/tradi.jpg'
 import GYM from '../../Assets/gym.jpg'
 import Auditorium from '../../Assets/auditorium.jpg'
-import Cover from '../../Assets/cover3.jpg'
+import Cover from '../../Assets/cover.jpg'
+import { styled } from "@mui/material";
+import Team from '../Team/Team'
+
+const Image = styled('img')({
+  width: '50%',
+});
 
 const Slider = () => {
-  const { ref, inView } = useInView({
+  const { ref } = useInView({
     threshold: 0.4,
   });
 
-  const [visibleItems, setVisibleItems] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const bottom =
-        Math.ceil(window.innerHeight + window.scrollY) >=
-        document.documentElement.scrollHeight;
-
-      if (bottom && visibleItems < sliderItems.length) {
-        setVisibleItems(visibleItems + 1);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [visibleItems]);
+  
+  
 
   const sliderItems = [
     // ... your slider items here
@@ -250,15 +242,33 @@ const Slider = () => {
       image: Cover,
     },
 
-  ];
+  ]
+
+  const [visibleItems, setVisibleItems] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const bottom =
+        Math.ceil(window.innerHeight + window.scrollY) >=
+        document.documentElement.scrollHeight;
+  
+      if (bottom && visibleItems < sliderItems.length) {
+        setVisibleItems(visibleItems + 1);
+      }
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [visibleItems, sliderItems.length]);
 
   return (
-    <div className="slider" ref={ref}> {/* Add ref here */}
+    <>
+        <div className="slider" ref={ref}> {/* Add ref here */}
       {sliderItems.slice(0, visibleItems).map((item, index) => (
         <div className="slider__item" key={index}>
           {index % 2 === 0 ? (
             <>
-              <img src={item.image} alt="Image" className="slider__image" />
+              <Image src={item.image} alt="Image" className="slider__image" />
               <div className="slider__content">
                 <h1 className="slider__title" >{item.title}</h1>
                 <p style={{ fontSize: "19px" }} >{item.description}</p>
@@ -270,12 +280,14 @@ const Slider = () => {
                 <h1 className="slider__title">{item.title}</h1>
                 <p style={{ fontSize: "19px" }}>{item.description}</p>
               </div>
-              <img src={item.image} alt="Image" className="slider__image" />
+              <Image src={item.image} alt="Image" className="slider__image" />
             </>
           )}
         </div>
       ))}
     </div>
+    {visibleItems === sliderItems.length && <Team />}
+    </>
   );
 };
 

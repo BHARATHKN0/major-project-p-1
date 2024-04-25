@@ -1,0 +1,47 @@
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-right: 30px;
+    margin-left: 30px;
+  }
+  
+  .image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .round-image {
+    
+    height: 200px;
+    border-radius: 60%;
+    margin-bottom: 10px;
+  }
+  
+  .image-info {
+    text-align: center;
+  }
+
+  .team-title {
+    color: orange;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+  
+  
+/* Media query for mobile devices */
+@media screen and (max-width: 600px) {
+    .image-container {
+      flex-direction: column; /* Change flex direction to display images in a single column */
+      align-items: center; /* Center align images */
+    }
+  
+    .image-wrapper {
+      margin-bottom: 0; /* Remove margin between images in mobile view */
+    }
+  }

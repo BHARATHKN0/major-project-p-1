@@ -8,7 +8,7 @@ const Component = styled(Box)`
     margin-top: 20px;
     padding: 10px;
     background-color: #f5f5f5;
-    border: 1px solid rgba(224, 224, 224, 0.7);
+    border: 0.01px solid orange;
     border-radius: 15px;
 `;
 

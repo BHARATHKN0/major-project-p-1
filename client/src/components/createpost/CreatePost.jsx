@@ -4,6 +4,7 @@ import { AddCircle as Add } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { DataContext } from '../../context/DataProvider';
 import { API } from '../../service/api';
+import Toast from '../Toast/Toast';
 
 const Container = styled(Box)(({ theme }) => ({
     margin: '65px 100px',
@@ -30,10 +31,8 @@ const InputTextField = styled(InputBase)`
     flex: 1;
     margin: 0 30px;
     font-size: 25px;
-    border: 2px solid rgba(224, 224, 224, 0.7);
+    border: 2px solid orange;
     border-radius: 10px
-
-
 `;
 
 const Textarea = styled(TextareaAutosize)`
@@ -41,11 +40,8 @@ const Textarea = styled(TextareaAutosize)`
     margin-top: 50px;
     font-size: 20px;
 
-    border: 2px solid rgba(225, 225, 225, 1);
+    border: 2px solid orange;
     border-radius: 10px
-    // &:focus-visible {
-    //     outline: none;
-    // }
 `;
 
 const initialPost = {
@@ -60,9 +56,13 @@ const initialPost = {
 const CreatePost = () => {
     const [post, setPost] = useState(initialPost);
     const [file, setFile] = useState('');
+    const [titleError, setTitleError] = useState('');
+    const [descriptionError, setDescriptionError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const { account } = useContext(DataContext);
     const location = useLocation();
     const navigate = useNavigate();
+
 
     useEffect(() => {
         setPost(prevPost => ({
@@ -77,28 +77,50 @@ const CreatePost = () => {
     };
 
     const savePost = async () => {
-        const response = await API.createPost(post);
-        if (response.isSuccess) {
-            navigate('/');
+        // Validation
+        let isValid = true;
+        if (post.title.trim() === '') {
+            setTitleError('Please fill the Title.');
+            isValid = false;
+        } else {
+            setTitleError('');
+        }
+        if (post.description.trim() === '') {
+            setDescriptionError('Please fill the Description.');
+            isValid = false;
+        } else {
+            setDescriptionError('');
+        }
+
+        if (isValid) {
+            const response = await API.createPost(post);
+            if (response.isSuccess) {
+                console.log("Post published successfully"); // Check if this log appears
+                setSuccessMessage('Signup successful! Please log in.');
+                navigate('/');
+
+            }
         }
     };
 
+
     // Function to replace URLs with clickable links
-    const renderTextWithLinks = (text) => {
-        const urlRegex = /(https?:\/\/[^\s]+)/g;
-        return text.split(urlRegex).map((part, index) => {
-            if (part.match(urlRegex)) {
-                return (
-                    <a key={index} href={part} target="_blank" rel="noopener noreferrer">
-                        {part}
-                    </a>
-                );
-            }
-            return part;
-        });
-    };
+    // const renderTextWithLinks = (text) => {
+    //     const urlRegex = /(https?:\/\/[^\s]+)/g;
+    //     return text.split(urlRegex).map((part, index) => {
+    //         if (part.match(urlRegex)) {
+    //             return (
+    //                 <a key={index} href={part} target="_blank" rel="noopener noreferrer">
+    //                     {part}
+    //                 </a>
+    //             );
+    //         }
+    //         return part;
+    //     });
+    // };
 
     return (
+        <>
         <Container>
             <Image src={post.picture || 'https://www.iesonline.co.in/colleges-image/reva-university.webp'} alt="banner" />
             <StyledFormControl>
@@ -108,7 +130,8 @@ const CreatePost = () => {
                 <input type="file" id="fileInput" style={{ display: 'none' }} onChange={(e) => setFile(e.target.files[0])} />
                 <InputTextField placeholder=" Title" onChange={(e) => handleChange(e)} name="title" />
                 <Button variant="contained" style={{ background: 'orange', borderRadius: '15px', color: '#fff' }} onClick={() => savePost()}>Publish</Button>
-            </StyledFormControl>
+            </StyledFormControl> <br />
+            {titleError && <div style={{ color: 'red' }}>{titleError}</div>}
             <Textarea
                 minRows={5}
                 placeholder=" Tell your story....."
@@ -117,8 +140,14 @@ const CreatePost = () => {
                 value={post.description}
             />
             {/* Render text content with embedded links */}
-            <div style={{ marginTop: '10px' }}>{renderTextWithLinks(post.description)}</div>
+            {/* <div style={{ marginTop: '10px', color: 'white' }}>{renderTextWithLinks(post.description)}</div> */}
+            {descriptionError && <div style={{ color: 'red' }}>{descriptionError}</div>}
+
+
+
         </Container>
+        {successMessage && <Toast message={successMessage} onClose={() => setSuccessMessage('')} />}
+        </>
     );
 };
 

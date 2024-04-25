@@ -17,7 +17,7 @@ const Image = styled("img")({
   marginTop: "65px",
   width: "100%",
   height: "60vh",
-  borderRadius: "10px",
+  borderRadius: "40px",
   objectFit: "contain",
 });
 
@@ -35,6 +35,7 @@ const EditIcon = styled(Edit)`
   padding: 5px;
   border: 1px solid #FFA500;
   border-radius: 10px;
+  cursor: pointer;
   
 `;
 
@@ -43,6 +44,7 @@ const DeleteIcon = styled(Delete)`
   padding: 5px;
   border: 1px solid #FFA500;
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 const Author = styled(Box)`
