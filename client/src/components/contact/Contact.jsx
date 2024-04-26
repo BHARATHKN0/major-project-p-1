@@ -70,9 +70,6 @@ if (!emailRegex.test(email)) {
 
   return (
     <>
-    <div className='head'>
-        <span>Your feedback is valuable please reach out to us for improvements</span>
-    </div>
     <div className='contact-form' id='Contact'>
         <div className='w-left'>
             <div className="awesome">

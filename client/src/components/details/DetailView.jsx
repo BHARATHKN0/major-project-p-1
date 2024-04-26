@@ -55,6 +55,8 @@ const Author = styled(Box)`
 
 const Description = styled(Typography)`
   word-break: break-word;
+  white-space: pre-line;
+
 `;
 
 
@@ -127,7 +129,7 @@ const DetailView = () => {
   
           <Author>
             <Typography>
-              Author :{" "}
+              <strong>Author : {" "}</strong>
             <Box
           component="span"
           style={{
@@ -142,13 +144,14 @@ const DetailView = () => {
               </Box>
             </Typography>
             <Typography style={{ marginLeft: "auto" }}>
-              Posted on: {new Date(post.createdDate).toDateString()}
+              <strong>Posted on: </strong>{new Date(post.createdDate).toDateString()}
             </Typography>
           </Author>
   
           {/* Render description with embedded clickable links */}
+
           <Description>
-          Description: {renderDescriptionWithLinks(post.description)}
+          <strong>Description:</strong> {renderDescriptionWithLinks(post.description)}
           </Description>
   
           <Comments post={post} />

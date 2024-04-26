@@ -23,6 +23,7 @@ const Name = styled(Typography)`
     margin-right: 10px;
 `;
 
+
 const DeleteIcon = styled(Delete)`
     margin-left: auto;
     cursor: pointer;
@@ -82,7 +83,7 @@ const renderCommentWithLinks = (commentText) => {
                 )}
             </Container>
             {/* Render comment text with clickable links */}
-            <Typography>
+            <Typography style={{ textDecoration: 'none' }} >
                 {renderCommentWithLinks(comment.comments)}
             </Typography>
         </Component>

@@ -38,7 +38,7 @@ export const loginUser = async (request, response) => {
             return response.status(400).json({ msg: 'Invalid password' });
         }
         if (match) {
-            const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_SECRET_KEY, { expiresIn: '59m'});
+            const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_SECRET_KEY, { expiresIn: '2h'});
             const refreshToken = jwt.sign(user.toJSON(), process.env.REFRESH_SECRET_KEY);
 
             const newToken = new Token({ token: refreshToken })

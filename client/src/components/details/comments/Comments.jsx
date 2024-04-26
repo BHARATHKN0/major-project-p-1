@@ -24,7 +24,8 @@ const StyledTextArea = styled(TextareaAutosize)`
     width: 100%;
     margin: 0 20px;
     border: 2px solid orange;
-    border-radius: 10px
+    border-radius: 10px;
+    font-size: 18px;
 `
 
 const ErrorText = styled('div')`

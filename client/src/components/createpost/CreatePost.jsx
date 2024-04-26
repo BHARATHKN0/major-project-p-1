@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { DataContext } from '../../context/DataProvider';
 import { API } from '../../service/api';
 import Toast from '../Toast/Toast';
+import './CreatePost.css'
 
 const Container = styled(Box)(({ theme }) => ({
     margin: '65px 100px',
@@ -54,7 +55,11 @@ const initialPost = {
 };
 
 const CreatePost = () => {
+
+
     const [post, setPost] = useState(initialPost);
+    const url = post.picture ? post.picture : 'https://www.iesonline.co.in/colleges-image/reva-university.webp';
+
     const [file, setFile] = useState('');
     const [titleError, setTitleError] = useState('');
     const [descriptionError, setDescriptionError] = useState('');
@@ -63,18 +68,44 @@ const CreatePost = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
+    const handleChange = (e) => {
+        setPost({ ...post, [e.target.name]: e.target.value });
+    };
 
     useEffect(() => {
+        const getImage = async () => {
+            if (file){
+                const data = new FormData();
+                data.append("name", file.name);
+                data.append("file", file);
+
+                //API call
+                const response = await API.uploadFile(data);
+            setPost(prevPost => ({
+                ...prevPost,
+                picture: response.data
+            }));         
+            }
+        }
+        getImage();
         setPost(prevPost => ({
             ...prevPost,
             categories: location.search?.split("=")[1] || 'All',
             username: account.username
         }));
-    }, [location.search, account.username]);
+    },[file, location.search, account.username])
 
-    const handleChange = (e) => {
-        setPost({ ...post, [e.target.name]: e.target.value });
-    };
+    
+
+
+    // useEffect(() => {
+    //     setPost(prevPost => ({
+    //         ...prevPost,
+    //         categories: location.search?.split("=")[1] || 'All',
+    //         username: account.username
+    //     }));
+    // }, [location.search, account.username]);
+
 
     const savePost = async () => {
         // Validation
@@ -122,10 +153,13 @@ const CreatePost = () => {
     return (
         <>
         <Container>
-            <Image src={post.picture || 'https://www.iesonline.co.in/colleges-image/reva-university.webp'} alt="banner" />
+            <Image src={url} alt="banner" />
             <StyledFormControl>
                 <label htmlFor="fileInput">
-                    <Add fontSize="large" color="action" />
+                    <div className="addIcon">
+                    <Add cursor='pointer' fontSize="large" color="action" />
+
+                    </div>
                 </label>
                 <input type="file" id="fileInput" style={{ display: 'none' }} onChange={(e) => setFile(e.target.files[0])} />
                 <InputTextField placeholder=" Title" onChange={(e) => handleChange(e)} name="title" />

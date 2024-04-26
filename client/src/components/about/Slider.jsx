@@ -19,7 +19,7 @@ import { styled } from "@mui/material";
 import Team from '../Team/Team'
 
 const Image = styled('img')({
-  width: '50%',
+  borderRadius: '25px',
 });
 
 const Slider = () => {

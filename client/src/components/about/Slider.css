@@ -25,9 +25,9 @@
   }
   
   .slider__image {
-    width: 50%; /* Image occupies half of the row */
+    width: 50%; 
     max-width: 100%; /* Ensure image does not exceed container width */
-    border-radius: 25px; /* Optional: Add rounded corners to the image */
+     /* Optional: Add rounded corners to the image */
 
   }
   
@@ -50,10 +50,17 @@
       flex-direction: column;
     }
   
-    .slider__image,
+    .slider__image {
+      width: 100%; /* Image spans full width on smaller screens */
+      max-width: 200%; /* Ensure image does not exceed container width */
+      border-radius: 25px; /* Optional: Add rounded corners to the image */
+    }
+  
     .slider__content {
-      width: 100%; /* Image and content span full width on smaller screens */
-      max-width: 100%;
+      width: 100%; /* Text content spans full width on smaller screens */
+      padding: 0 20px; /* Add padding for spacing */
+      box-sizing: border-box; /* Ensure padding is included in width */
+      text-align: center;
     }
   }
   

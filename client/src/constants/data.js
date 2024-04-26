@@ -8,4 +8,5 @@ export const categories = [
     { id: 3, type: 'News'},
     { id: 4, type: 'Sports'},
     { id: 5, type: 'Events'},
+    { id: 6, type: 'Hackathons'},
 ]
