@@ -17,6 +17,7 @@ Project Dependencies:
 Client side:
 
 "dependencies": {
+
 "@emailjs/browser": "^4.3.3",
 "@emotion/react": "^11.11.4",
 "@emotion/styled": "^11.11.0",
@@ -36,6 +37,7 @@ Client side:
 "react-router-dom": "^6.22.3",
 "react-scripts": "^5.0.1",
 "web-vitals": "^2.1.4"
+
 },
 
 1. @emailjs/browser: This package allows you to send emails directly from the browser using EmailJS services.
@@ -69,12 +71,14 @@ Client side:
 Server Side:
 
 "dependencies": {
+
 "@emotion/react": "^11.11.4",
 "@emotion/styled": "^11.11.0",
 "@mui/material": "^5.15.12",
 "axios": "^1.6.7",
 "react-scripts": "^5.0.1",
 "web-vitals": "^3.5.2"
+
 }
 
 1. @emotion/react:
@@ -119,6 +123,7 @@ COMPUTER SCIENCE & INFORMATION TECHNOLOGY"
 Work on Project: "Handled UI design And development part"
 
 Member 2:
+
 "A N SHASHI KUMAR
 R20EJ001
 COMPUTER SCIENCE & INFORMATION TECHNOLOGY"
@@ -126,6 +131,7 @@ COMPUTER SCIENCE & INFORMATION TECHNOLOGY"
 Work on Project: "Handled Frontend & Backend for login, creating & detailview of posts & displaying in the home page & backend DB schema development"
 
 Member 3:
+
 "P SAI THEJESH
 R20EJ036
 COMPUTER SCIENCE & INFORMATION TECHNOLOGY"
@@ -133,6 +139,7 @@ COMPUTER SCIENCE & INFORMATION TECHNOLOGY"
 Work on Project: "Handled Manual Testing of project and collecting data from the management for improvements and reporting bugs & errors to the team"
 
 Member 4:
+
 "BHARATH K N
 R20EJ012
 COMPUTER SCIENCE & INFORMATION TECHNOLOGY"
