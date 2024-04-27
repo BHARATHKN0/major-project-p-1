@@ -64,6 +64,7 @@ const CreatePost = () => {
     const [titleError, setTitleError] = useState('');
     const [descriptionError, setDescriptionError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const { account } = useContext(DataContext);
     const location = useLocation();
     const navigate = useNavigate();
@@ -80,11 +81,16 @@ const CreatePost = () => {
                 data.append("file", file);
 
                 //API call
-                const response = await API.uploadFile(data);
-            setPost(prevPost => ({
-                ...prevPost,
-                picture: response.data
-            }));         
+                try {
+                    const response = await API.uploadFile(data);
+                    setPost(prevPost => ({
+                        ...prevPost,
+                        picture: response.data
+                    }));
+                } catch (error) {
+                    setErrorMessage('File upload failed. Please try again.');
+                }
+                   
             }
         }
         getImage();
@@ -95,16 +101,6 @@ const CreatePost = () => {
         }));
     },[file, location.search, account.username])
 
-    
-
-
-    // useEffect(() => {
-    //     setPost(prevPost => ({
-    //         ...prevPost,
-    //         categories: location.search?.split("=")[1] || 'All',
-    //         username: account.username
-    //     }));
-    // }, [location.search, account.username]);
 
 
     const savePost = async () => {
@@ -127,28 +123,13 @@ const CreatePost = () => {
             const response = await API.createPost(post);
             if (response.isSuccess) {
                 console.log("Post published successfully"); // Check if this log appears
-                setSuccessMessage('Signup successful! Please log in.');
+                setSuccessMessage('Post published successfully');
                 navigate('/');
 
             }
         }
     };
 
-
-    // Function to replace URLs with clickable links
-    // const renderTextWithLinks = (text) => {
-    //     const urlRegex = /(https?:\/\/[^\s]+)/g;
-    //     return text.split(urlRegex).map((part, index) => {
-    //         if (part.match(urlRegex)) {
-    //             return (
-    //                 <a key={index} href={part} target="_blank" rel="noopener noreferrer">
-    //                     {part}
-    //                 </a>
-    //             );
-    //         }
-    //         return part;
-    //     });
-    // };
 
     return (
         <>
@@ -173,12 +154,8 @@ const CreatePost = () => {
                 name="description"
                 value={post.description}
             />
-            {/* Render text content with embedded links */}
-            {/* <div style={{ marginTop: '10px', color: 'white' }}>{renderTextWithLinks(post.description)}</div> */}
             {descriptionError && <div style={{ color: 'red' }}>{descriptionError}</div>}
-
-
-
+            {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
         </Container>
         {successMessage && <Toast message={successMessage} onClose={() => setSuccessMessage('')} />}
         </>

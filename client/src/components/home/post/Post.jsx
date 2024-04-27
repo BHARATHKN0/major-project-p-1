@@ -15,33 +15,34 @@ const Container = styled(Box)`
 
 const Image = styled('img')`
   width: 100%;
-  height: 200px;
+  height: 180px;
   border-radius: 10px 10px 0 0;
   object-fit: cover;
 `;
 
 const Text = styled(Typography)`
   color: #878787;
-  border: 1px solid rgba(224, 165, 0, 0.2);
+  border: 0.1px solid rgba(224, 165, 0, 0.2);
   border-radius: 10px;
-  font-size: 16px;
-  padding: 5px;
+  font-size: 14px;
+  padding: 2px;
 `;
 
 const Heading = styled(Typography)`
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;
+  
 `;
 
 const Details = styled(Typography)`
-  font-size: 14px;
+  font-size: 13px;
   word-break: break-word;
-  font-weight: 600;
-  padding: 5px;
+  font-weight: 550;
+  padding: 3px;
 `;
 
 const Post = ({ post }) => {
