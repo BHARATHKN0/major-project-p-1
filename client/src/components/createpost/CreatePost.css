@@ -28,3 +28,17 @@
     opacity: 1;
   }
   
+
+  .error-message {
+    color: red;
+    background-color: rgba(225, 225, 140, 0.5);
+    padding: 8px 12px; /* Adjust padding to provide sufficient spacing around text */
+    border: 1px solid orange;
+    margin: 10px 0px 15px 50px;
+    border-radius: 5px; /* Smaller border radius for a softer look */
+    display: inline-block; /* Ensures the div expands only as wide as necessary */
+    max-width: 80%; /* Limits the width of the div to prevent excessive width */
+    word-wrap: break-word; /* Allows long words to break onto the next line */
+    box-sizing: border-box; /* Ensures padding and border are included in width calculation */
+  }
+   

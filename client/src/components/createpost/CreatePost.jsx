@@ -155,7 +155,7 @@ const CreatePost = () => {
                 value={post.description}
             />
             {descriptionError && <div style={{ color: 'red' }}>{descriptionError}</div>}
-            {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
         </Container>
         {successMessage && <Toast message={successMessage} onClose={() => setSuccessMessage('')} />}
         </>

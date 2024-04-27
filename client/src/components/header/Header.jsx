@@ -7,7 +7,7 @@ import { DataContext } from '../../context/DataProvider';
 const Component = styled(AppBar)`
     background: #FFFFFF;
     color: #000;
-    background-color:rgba(225, 225, 225, 1);
+    background-color:rgba(225, 225, 225, 0.6);
     * :hover{
         // color: black;
         transform: scale(1.1);
