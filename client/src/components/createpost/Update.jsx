@@ -21,7 +21,7 @@ const Image = styled('img')({
     marginTop: '65px',
     width: '100%',
     height: '50vh',
-    objectFit: 'cover',
+    objectFit: 'contain',
     borderRadius: '15px',
 });
 
