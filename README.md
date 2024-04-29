@@ -166,7 +166,7 @@ Member 4:
 R20EJ012
 COMPUTER SCIENCE & INFORMATION TECHNOLOGY"
 
-Work on Project: "Handled frontend of About, Contact, Categaries & styles & animation in all pages & complete mobile responsive & handled backend errors in the UI in many scenarios and done validations in every user input step & Deployed project on 'Heroku' faced issues with the API's call solved those issues & finalized the project."
+Work on Project: "Handled frontend of Login authientication, About, Contact, Categaries & styles & animation in all pages & complete mobile responsive & handled backend errors in the UI in many scenarios and done validations in every user input step & Deployed project on 'Heroku' faced issues with the API's call solved those issues & finalized the project."
 
 
 
