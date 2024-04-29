@@ -5,14 +5,21 @@ import mongoose from 'mongoose';
 const url = 'http://localhost:8000';
 
 
-let gfs, gridfsBucket;
+let gfs_fs, gfs_photos, gridfsBucket_fs, gridfsBucket_photos;
 const conn = mongoose.connection;
+
 conn.once('open', () => {
-    gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+    gridfsBucket_fs = new mongoose.mongo.GridFSBucket(conn.db, {
         bucketName: 'fs'
     });
-    gfs = grid(conn.db, mongoose.mongo);
-    gfs.collection('fs');
+    gfs_fs = grid(conn.db, mongoose.mongo);
+    gfs_fs.collection('fs');
+
+    gridfsBucket_photos = new mongoose.mongo.GridFSBucket(conn.db, {
+        bucketName: 'photos'
+    });
+    gfs_photos = grid(conn.db, mongoose.mongo);
+    gfs_photos.collection('photos');
 });
 
 
@@ -27,10 +34,22 @@ export const uploadImage = (request, response) => {
 
 export const getImage = async (request, response) => {
     try {   
-        const file = await gfs.files.findOne({ filename: request.params.filename });
-        // const readStream = gfs.createReadStream(file.filename);
-        // readStream.pipe(response);
-        const readStream = gridfsBucket.openDownloadStream(file._id);
+        let file_fs = await gfs_fs.files.findOne({ filename: request.params.filename });
+        let file_photos = await gfs_photos.files.findOne({ filename: request.params.filename });
+
+        if (!file_fs && !file_photos) {
+            return response.status(404).json({ msg: "File not found" });
+        }
+
+        let readStream;
+
+        if (file_fs) {
+            readStream = gridfsBucket_fs.openDownloadStream(file_fs._id);
+        } else {
+            // If not found in fs, fetch from photos collection
+            readStream = gridfsBucket_photos.openDownloadStream(file_photos._id);
+        }
+
         readStream.pipe(response);
     } catch (error) {
         response.status(500).json({ msg: error.message });
