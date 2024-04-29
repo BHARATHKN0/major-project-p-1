@@ -72,45 +72,64 @@ Server Side:
 
 "dependencies": {
 
-"@emotion/react": "^11.11.4",
-"@emotion/styled": "^11.11.0",
-"@mui/material": "^5.15.12",
-"axios": "^1.6.7",
-"react-scripts": "^5.0.1",
-"web-vitals": "^3.5.2"
 
-}
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "gridfs-stream": "^1.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^5.9.1",
+    "mongoose": "^8.2.0",
+    "multer": "^1.4.2",
+    "multer-gridfs-storage": "^5.0.2"
 
-1. @emotion/react:
 
-   - This package provides tools for using emotion's CSS-in-JS styling solution with React. It allows you to define styles directly within your React components.
-   - Emotion is known for its performance and flexibility in styling React applications, offering various styling approaches like styled components and CSS props.
+  },
 
-2. @emotion/styled:
 
-   - Works in conjunction with `@emotion/react` to enable styled components in React using the CSS-in-JS approach.
-   - With `@emotion/styled`, you can create styled React components by defining styles directly within JavaScript code, leveraging the power of emotion's CSS-in-JS features.
 
-3. @mui/material:
 
-   - This package provides Material-UI components for building modern and responsive user interfaces in React applications.
-   - Material-UI offers a comprehensive set of customizable React components based on Google's Material Design guidelines, making it easy to create visually appealing and consistent UIs.
+1. bcrypt:
+   -  bcrypt is a password-hashing function designed to be slow and resistant to brute-force attacks. Commonly used in applications for securely hashing passwords before storing them in databases.
 
-4. axios:
+2. body-parser:
+   -  body-parser is a middleware for Express.js that extracts the body portion of an incoming request and exposes it on req.body. Essential for parsing request bodies in POST and PUT requests in Express applications.
 
-   - Axios is a popular JavaScript library used for making HTTP requests from the browser. It supports various features like interceptors, request and response transformations, and more.
-   - Axios simplifies the process of making asynchronous HTTP requests in frontend applications and is widely adopted due to its simplicity and versatility.
+3. cors:
+   -  cors is a middleware for Express.js that enables Cross-Origin Resource Sharing (CORS), allowing controlled access to resources located on other domains. Useful for allowing or restricting access to your API from different origins or domains.
 
-5. react-scripts:
+4. dotenv:
+   -  dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. Commonly used in Node.js applications to manage configuration settings and sensitive information like API keys.
 
-   - React-scripts is a set of scripts and tools provided by Create React App (CRA) to bootstrap and manage React applications. It includes development server, build configurations, and other useful utilities.
-   - React-scripts abstracts away the complex build setup and configuration required for React projects, allowing developers to focus on building the application logic.
+5. express:
+   -  Express.js is a minimalist web application framework for Node.js, providing a robust set of features for building web and mobile applications. Widely adopted for creating APIs and web applications due to its simplicity and flexibility.
 
-6. web-vitals:
-   - Web Vitals is a library used for measuring and reporting essential user-centric performance metrics of web pages, such as Core Web Vitals (LCP, FID, CLS).
-   - Monitoring web vitals helps developers understand and optimize the performance of their websites, ensuring a better user experience and search engine ranking.
+6. gridfs-stream:
+   -  gridfs-stream is a Node.js module that provides a stream-based API for working with MongoDB's GridFS, which is a specification for storing and retrieving large files in MongoDB. Useful for handling large files in MongoDB databases efficiently, such as images, videos, and other binary data.
+
+7. jsonwebtoken:
+   -  jsonwebtoken is a library for generating and verifying JSON Web Tokens (JWT) in Node.js. JWTs are commonly used for authentication and authorization in web applications, and this library simplifies their implementation.
+
+8. mongodb:
+   -  mongodb is the official MongoDB driver for Node.js, providing a high-level API for interacting with MongoDB databases. Enables Node.js applications to perform CRUD operations, data aggregation, and more on MongoDB databases.
+
+9. mongoose:
+   -  Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node.js, designed to work in an asynchronous environment. Simplifies interaction with MongoDB by providing a schema-based solution for modeling application data.
+
+10. multer:
+    -  multer is a middleware for handling multipart/form-data, which is commonly used for uploading files in HTML forms. Allows Express.js applications to easily handle file uploads, storing them in the filesystem or another storage solution.
+
+11. multer-gridfs-storage:
+    -  multer-gridfs-storage is a GridFS storage engine for multer, allowing file uploads directly to MongoDB's GridFS using multer. Useful for storing uploaded files directly in MongoDB's GridFS, which can be advantageous for applications using MongoDB as the primary database and needing to manage large files.
+
+
 
 These dependencies collectively provide a robust foundation for developing and optimizing your React website, encompassing styling, UI components, HTTP communication, project setup, and performance monitoring.
+
+
+
 
 About TEAM:
 
@@ -122,6 +141,7 @@ COMPUTER SCIENCE & INFORMATION TECHNOLOGY"
 
 Work on Project: "Handled UI design And development part"
 
+
 Member 2:
 
 "A N SHASHI KUMAR
@@ -129,6 +149,7 @@ R20EJ001
 COMPUTER SCIENCE & INFORMATION TECHNOLOGY"
 
 Work on Project: "Handled Frontend & Backend for login, creating & detailview of posts & displaying in the home page & backend DB schema development"
+
 
 Member 3:
 
@@ -138,10 +159,22 @@ COMPUTER SCIENCE & INFORMATION TECHNOLOGY"
 
 Work on Project: "Handled Manual Testing of project and collecting data from the management for improvements and reporting bugs & errors to the team"
 
+
 Member 4:
 
 "BHARATH K N
 R20EJ012
 COMPUTER SCIENCE & INFORMATION TECHNOLOGY"
 
-Work on Project: "Handled frontend of About, Contact, Categaries & styles & animation in all pages & complete mobile responsive & handled backend errors in the UI in many scenarios and done validations in every user input step"
+Work on Project: "Handled frontend of About, Contact, Categaries & styles & animation in all pages & complete mobile responsive & handled backend errors in the UI in many scenarios and done validations in every user input step & Deployed project on 'Heroku' faced issues with the API's call solved those issues & finalized the project."
+
+
+
+
+
+
+
+Project Deployed Version Link:
+
+
+"https://campus-connect-4a3312e557c4.herokuapp.com/"
